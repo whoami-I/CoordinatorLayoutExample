@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- 主动view，也叫dependency -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/dependency"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/ic_launcher_background" />
+    <!-- 被动view，也叫child -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/child"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_anchor="@id/dependency"
+        app:layout_behavior=".Behavior.MyBehavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
