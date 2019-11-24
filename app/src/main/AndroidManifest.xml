@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Behavior.MainActivity"/>
+        <activity android:name=".behavior.MainActivity"/>
+        <activity android:name=".appbarlayoutexample.MainActivity" android:theme="@style/ActivityTheme"/>
+
     </application>
 
 </manifest>

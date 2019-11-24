@@ -1,4 +1,4 @@
-package com.mike.coordinatorlayoutexample.Behavior;
+package com.mike.coordinatorlayoutexample.behavior;
 
 
 import android.view.MotionEvent;

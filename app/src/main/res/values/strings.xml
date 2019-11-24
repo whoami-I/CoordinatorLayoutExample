@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CoordinatorLayoutExample</string>
+    <string name="appbarlayoutexample_name">AppBarLayoutExample</string>
 </resources>

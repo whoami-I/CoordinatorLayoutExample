@@ -1,7 +1,5 @@
 package com.mike.coordinatorlayoutexample.main;
 
-import com.mike.coordinatorlayoutexample.Behavior.MainActivity;
-
 class ItemDataBean {
 
     private String mItemName;

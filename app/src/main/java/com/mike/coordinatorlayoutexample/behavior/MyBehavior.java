@@ -1,10 +1,8 @@
-package com.mike.coordinatorlayoutexample.Behavior;
+package com.mike.coordinatorlayoutexample.behavior;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewParent;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 

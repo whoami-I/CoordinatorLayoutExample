@@ -34,6 +34,8 @@ public class MainActivity extends BaseActivity {
 
     private void initDataList() {
         mDataList.add(new ItemDataBean("Behavior",
-                com.mike.coordinatorlayoutexample.Behavior.MainActivity.class, ColorGenerator.getInstance().getColor()));
+                com.mike.coordinatorlayoutexample.behavior.MainActivity.class, ColorGenerator.getInstance().getColor()));
+        mDataList.add(new ItemDataBean("AppBarLayoutExample",
+                com.mike.coordinatorlayoutexample.appbarlayoutexample.MainActivity.class, ColorGenerator.getInstance().getColor()));
     }
 }
