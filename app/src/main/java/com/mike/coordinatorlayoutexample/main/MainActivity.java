@@ -37,5 +37,7 @@ public class MainActivity extends BaseActivity {
                 com.mike.coordinatorlayoutexample.behavior.MainActivity.class, ColorGenerator.getInstance().getColor()));
         mDataList.add(new ItemDataBean("AppBarLayoutExample",
                 com.mike.coordinatorlayoutexample.appbarlayoutexample.MainActivity.class, ColorGenerator.getInstance().getColor()));
+        mDataList.add(new ItemDataBean("CollapsingToolBarLayoutExample",
+                com.mike.coordinatorlayoutexample.collapsingtoolbarlayoutexample.MainActivity.class, ColorGenerator.getInstance().getColor()));
     }
 }
