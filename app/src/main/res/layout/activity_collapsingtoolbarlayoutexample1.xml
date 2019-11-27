@@ -21,12 +21,14 @@
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentScrim="@color/colorPrimary"
-            app:title="樱花"
-            app:scrimAnimationDuration="50"
             app:collapsedTitleTextAppearance="@style/ToolbarTitleStyle"
+            app:contentScrim="@null"
             app:expandedTitleTextAppearance="@style/BigToolbarTitleStyle"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:scrimAnimationDuration="50"
+            app:scrimVisibleHeightTrigger="0dp"
+            app:statusBarScrim="@null"
+            app:title="樱花">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -40,7 +42,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#00000000"
+                android:background="@color/colorPrimary"
                 app:contentInsetStart="0dp"
                 app:contentInsetStartWithNavigation="0dp"
                 app:layout_collapseMode="pin"

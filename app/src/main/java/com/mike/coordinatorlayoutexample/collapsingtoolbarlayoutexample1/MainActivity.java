@@ -1,7 +1,9 @@
 package com.mike.coordinatorlayoutexample.collapsingtoolbarlayoutexample1;
 
 
+import android.animation.ArgbEvaluator;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -25,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity {
-
+    private static final String TAG = "MainActivity";
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
     @BindView(R.id.appbar_layout)
@@ -37,7 +39,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
 
-    int mHeight;
     @Override
     public int getContentViewId() {
         return R.layout.activity_collapsingtoolbarlayoutexample1;
@@ -45,28 +46,36 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void afterSetContentView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
+        // init padding
         FrameLayout.LayoutParams lps = (FrameLayout.LayoutParams) mToolBar.getLayoutParams();
         lps.topMargin = DisplayUtils.getStatusBarHeight(this);
-
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+        AppBarLayout.OnOffsetChangedListener listener = new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                Log.d("haha",""+verticalOffset);
+                Log.d("haha", "" + verticalOffset);
+                // get total height and calc ratio
+                int totalHeight = mCollapsingToolbarLayout.getHeight() - mToolBar.getHeight() - ((FrameLayout.LayoutParams) mToolBar.getLayoutParams()).topMargin;
+                float ratio = getRatio(-verticalOffset, totalHeight);
+                changeToolBar(ratio);
+                changeStatusBar(ratio);
             }
-        });
+        };
+        changeToolBar(0);
+
 
         ViewTreeObserver vto = mAppBarLayout.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 mAppBarLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                mCollapsingToolbarLayout.setScrimVisibleHeightTrigger(mToolBar.getHeight() + 1 + DisplayUtils.getStatusBarHeight(MainActivity.this));
-                mHeight = 0;
+                // 防止多次add
+                mAppBarLayout.removeOnOffsetChangedListener(listener);
+                mAppBarLayout.addOnOffsetChangedListener(listener);
             }
         });
 
+        // init recyclerview
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         List<String> datas = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             datas.add("this is " + i + " item");
@@ -87,6 +96,20 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    private void changeStatusBar(float ratio) {
+        int transparent = (int) (255 * ratio);
+        int color = 0x008577 | (transparent << 24);
+        getWindow().setStatusBarColor(color);
+    }
+
+    private void changeToolBar(float ratio) {
+//        Drawable drawable = mToolBar.getBackground();
+//        drawable = drawable.mutate();
+//        int alpha= (int) (ratio*255);
+//        drawable.setAlpha(alpha);
+        mToolBar.setAlpha(ratio);
+    }
+
     @Override
     public void beforeSetContentView() {
         super.beforeSetContentView();
@@ -95,5 +118,17 @@ public class MainActivity extends BaseActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
         decorView.setSystemUiVisibility(option);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
+    }
+
+    private float getRatio(int cur, int total) {
+        float ratio = 0.0f;
+        int offset = 100;
+        if (cur >= total - offset) {
+            cur = cur - (total - offset);
+            total = offset;
+            ratio = cur * 1.0f / total;
+            ratio = ratio > 1.0f ? 1.0f : ratio;
+        }
+        return ratio;
     }
 }
