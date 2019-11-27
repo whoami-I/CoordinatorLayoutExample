@@ -17,14 +17,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:title="@string/collapsingtoolbarlayoutlayoutexample_name"
-            app:titleTextAppearance="@style/ToolbarTitleStyle"></androidx.appcompat.widget.Toolbar>
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/colorPrimary"
+            app:title="风景"
+
+            app:scrimAnimationDuration="50"
+            app:collapsedTitleTextAppearance="@style/ToolbarTitleStyle"
+            app:expandedTitleTextAppearance="@style/BigToolbarTitleStyle"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic1"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#00000000"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:titleTextAppearance="@style/ToolbarTitleStyle"></androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
 
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
