@@ -19,6 +19,10 @@
         <activity android:name=".behavior.MainActivity"/>
         <activity android:name=".appbarlayoutexample.MainActivity" android:theme="@style/ActivityTheme"/>
         <activity android:name=".collapsingtoolbarlayoutexample.MainActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".collapsingtoolbarlayoutzoom.MainActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".collapsingtoolbarlayoutexample1.MainActivity" android:theme="@style/ActivityTheme"/>
+        <activity android:name=".collapsingtoolbarlayoutexample2.MainActivity" android:theme="@style/ActivityTheme"/>
+
 
     </application>
 
