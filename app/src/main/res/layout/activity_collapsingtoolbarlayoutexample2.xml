@@ -9,6 +9,7 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
@@ -22,13 +23,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="@color/colorPrimary"
-            app:title="牡丹花"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:scrimAnimationDuration="50"
-            app:collapsedTitleTextAppearance="@style/ToolbarTitleStyle"
-            app:expandedTitleTextAppearance="@style/BigToolbarTitleStyle"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:scrimVisibleHeightTrigger="0dp">
 
             <ImageView
+                android:id="@+id/img"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
@@ -48,7 +48,14 @@
                 app:titleTextAppearance="@style/ToolbarTitleStyle"></androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-
     </com.google.android.material.appbar.AppBarLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_head"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/head"
+        android:layout_gravity="center_horizontal"
+        app:layout_behavior=".collapsingtoolbarlayoutexample2.HeadScaleBehavior" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

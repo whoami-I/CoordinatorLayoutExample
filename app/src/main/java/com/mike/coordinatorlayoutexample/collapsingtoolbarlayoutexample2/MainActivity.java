@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -26,6 +27,7 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseActivity {
 
+    private static final String TAG = "MainActivity";
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
     @BindView(R.id.appbar_layout)
@@ -36,8 +38,9 @@ public class MainActivity extends BaseActivity {
     CoordinatorLayout mCoordinatorLayout;
     @BindView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @BindView(R.id.img)
+    ImageView img;
 
-    int mHeight;
     @Override
     public int getContentViewId() {
         return R.layout.activity_collapsingtoolbarlayoutexample2;
@@ -45,15 +48,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void afterSetContentView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
         FrameLayout.LayoutParams lps = (FrameLayout.LayoutParams) mToolBar.getLayoutParams();
         lps.topMargin = DisplayUtils.getStatusBarHeight(this);
 
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                Log.d("haha",""+verticalOffset);
+                //Log.d(TAG, "" + recyclerView.getY());
             }
         });
 
@@ -62,10 +63,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onGlobalLayout() {
                 mAppBarLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                mCollapsingToolbarLayout.setScrimVisibleHeightTrigger(mToolBar.getHeight() + 1 + DisplayUtils.getStatusBarHeight(MainActivity.this));
-                mHeight = 0;
             }
         });
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         List<String> datas = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
@@ -80,7 +80,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public View.OnLongClickListener setItemLongClickListener(ViewHolder holder, int position) {
                 return v -> {
-                    mAppBarLayout.setExpanded(true, false);
                     return true;
                 };
             }
